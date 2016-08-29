@@ -1,0 +1,18 @@
+version: '2'
+services:
+  ansible:
+    extends:
+      file: common.yml
+      service: common
+  s15.kaveh.me:
+    extends:
+      file: common.yml
+      service: common
+  s16.kaveh.me:
+    extends:
+      file: common.yml
+      service: common
+  s17.kaveh.me:
+    extends:
+      file: common.yml
+      service: common

@@ -1,0 +1,8 @@
+version: '2'
+services:
+  common:
+    dns_search: kaveh.me
+    image: debian.jessie.ssh
+    build:
+      context: ../../../servers
+      dockerfile: Dockerfil.debian.jessie.ssh

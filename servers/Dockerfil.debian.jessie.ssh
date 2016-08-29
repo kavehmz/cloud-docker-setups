@@ -1,0 +1,19 @@
+FROM debian:8
+MAINTAINER kavehmz@gmail.com
+
+RUN apt-get update
+RUN apt-get install -y openssh-server
+
+RUN mkdir -p ~/.ssh
+COPY ssh/DUMMY_KEY_id_rsa /root/.ssh/DUMMY_KEY_id_rsa
+COPY ssh/DUMMY_KEY_id_rsa.pub /root/.ssh/DUMMY_KEY_id_rsa.pub
+RUN cat ~/.ssh/DUMMY_KEY_id_rsa.pub >> ~/.ssh/authorized_keys
+RUN chmod 400 ~/.ssh -R
+
+
+RUN apt-get install -y ssl-cert nagios-nrpe-server perl stunnel4 redis-server  libio-socket-timeout-perl libperlio-via-timeout-perl libredis-perl libtime-out-perl libtry-tiny-perl nagios-plugins
+RUN sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+
+RUN mkdir /var/run/sshd
+CMD ["echo", "'Starting SSH'"]
+CMD ["/usr/sbin/sshd", "-D"]
